@@ -1,0 +1,10 @@
+1. Open image file on ImageJ
+2. image > color > split channels
+3. Convert to 8 bit grayscale
+4. Plugins > analyze > tubeness
+5. 1.5-2 for tubeness works best
+6. Convert to 8 bit grayscale
+7. Process > Morphology can be used to change size of trenches
+8. Use matlab to change image to pure black and white
+9. Plugins > skeleton
+
