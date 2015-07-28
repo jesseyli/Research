@@ -7,4 +7,3 @@
 7. Process > Morphology can be used to change size of trenches
 8. Use matlab to change image to pure black and white
 9. Plugins > skeleton
-
