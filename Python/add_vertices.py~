@@ -1,0 +1,18 @@
+import networkx as nx
+from PIL import Image, ImageDraw
+
+G = nx.Graph()
+imageName = input('Enter image name: ')
+img = Image.open(imageName)
+
+data = list(img.getdata())
+index = 0
+draw = ImageDraw.Draw(img)
+draw.pieslice((0,0,24,49),0,45,None,'red')
+
+for x in data:
+	if x[0] == 237 or x[0] == 63:
+		G.add_node(index,coord = index)
+	index += 1
+
+img.save('output')
