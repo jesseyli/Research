@@ -13,7 +13,7 @@ dim = img.size
 #center = ast.literal_eval(input('Enter location of center (x,y): '))
 center = (310,305) #remove later
 #degrees = int(input('Enter number of degrees per slice, factor of 360 for best results: '))
-degrees = 120 #remove later
+degrees = 90 #remove later
 
 
 
@@ -89,20 +89,44 @@ for i in range(0,dim[0]):
 		if color > 0 and color < 255:
 			start[color].append((i,j))
 
+def ends(start, img, color):
+	start_color = img.getpixel(start)
+	s5 = list(start)
+	s1 = (s5[0]-1,s5[1]-1)
+	s2 = (s5[0],s5[1]-1)
+	s3 = (s5[0]+1,s5[1]-1)
+	s4 = (s5[0]-1,s5[1])
+	s6 = (s5[0]+1,s5[1])
+	s7 = (s5[0]-1,s5[1]+1)
+	s8 = (s5[0],s5[1]+1)
+	s9 = (s5[0]+1,s5[1]+1)
+	if start_color == color:
+		return [start]
+	if start_color != 255 and start_color != 1:
+		img.putpixel(start,255)
+		return ends(s1,img,color) + ends(s2,img,color) + ends(s3,img,color) + ends(s4,img,color) + ends(s6,img,color) + ends(s7,img,color) + ends(s8,img,color) + ends(s9,img,color)
+	return []
+	
 x = center[0]
 y = center[1]
+
 
 while x < dim[0]:
 	value = overlay.getpixel((x,y)) 
 	if not(value == 0 or value == 255):
-		overlay.putpixel((x,y),255)
+		overlay.putpixel((x,y),0)
+		print((x,y),ends((x,y),overlay,2))
 	x += 1
 
-"""
-def find_ends(start, )
+i = 2
+while i < last_color:
+	i += 1
+	for j in start[i-1]:
+		print(j, ends(j,overlay,i))
+for j in start[last_color]:
+	print(j,ends(j,overlay,1))
 
-"""
-
+img.show()
 overlay.show()
-for i in start:
-	print(i,start[i])
+#for i in start:
+#	print(i,start[i])
